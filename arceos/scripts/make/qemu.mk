@@ -1,6 +1,6 @@
 # QEMU arguments
 
-QEMU := qemu-system-$(ARCH)
+QEMU := qemu-system-$(ARCH)-9.2.3
 
 ifeq ($(BUS), mmio)
   vdev-suffix := device
@@ -66,7 +66,7 @@ ifeq ($(GRAPHIC), n)
 endif
 
 ifeq ($(QEMU_LOG), y)
-  qemu_args-y += -D qemu.log -d in_asm,int,mmu,pcall,cpu_reset,guest_errors
+  qemu_args-y += -D qemu.log -d in_asm,int,mmu,pcall,cpu_reset,guest_errors,exec
 endif
 
 qemu_args-debug := $(qemu_args-y) -s -S
