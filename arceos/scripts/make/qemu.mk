@@ -1,6 +1,6 @@
 # QEMU arguments
 
-QEMU := qemu-system-$(ARCH)
+QEMU := qemu-system-$(ARCH)-9.2.3
 
 ifeq ($(BUS), mmio)
   vdev-suffix := device

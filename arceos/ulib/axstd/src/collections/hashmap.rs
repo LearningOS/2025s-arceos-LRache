@@ -1,7 +1,12 @@
+#[cfg(feature = "alloc")]
 extern crate alloc;
 
+#[cfg(feature = "alloc")]
 use alloc::vec;
+
+#[cfg(feature = "alloc")]
 use alloc::vec::Vec;
+
 use core::clone::Clone;
 use core::fmt::Display;
 use core::hash::{Hash, Hasher};
@@ -20,11 +25,13 @@ impl Hasher for SimpleHasher {
     }
 }
 
+#[cfg(feature = "alloc")]
 pub struct HashMap <K, V> {
     buckets: Vec<Vec<(K, V)>>,
     capacity: usize,
 }
 
+#[cfg(feature = "alloc")]
 impl<'a, K, V> HashMap<K, V> 
     where K: Hash + Eq + Clone + Display,
           V: Clone + Display
@@ -72,12 +79,14 @@ impl<'a, K, V> HashMap<K, V>
     }
 }
 
+#[cfg(feature = "alloc")]
 pub struct HashMapIterator<'a, K, V> {
     hashmap: &'a HashMap<K, V>,
     bucket_index: usize,
     item_index: usize,
 }
 
+#[cfg(feature = "alloc")]
 impl<'a, K, V> HashMapIterator<'a, K, V> {
     pub fn new(hashmap: &'a HashMap<K, V>) -> Self {
         HashMapIterator {
@@ -88,6 +97,7 @@ impl<'a, K, V> HashMapIterator<'a, K, V> {
     }
 }
 
+#[cfg(feature = "alloc")]
 impl<'a, K, V> Iterator for HashMapIterator<'a, K, V> {
     type Item = (&'a K, &'a V);
 
