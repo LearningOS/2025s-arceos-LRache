@@ -105,7 +105,6 @@ fn vmexit_handler(ctx: &mut VmCpuRegisters) -> bool {
             if ctx.guest_regs.sepc == 0x8020_0000 {
                 ctx.guest_regs.gprs.set_reg(A1, 0x1234);
                 ctx.guest_regs.sepc += 4;
-                return true;
             } else {
                 panic!("Bad instruction: {:#x} sepc: {:#x}",
                     stval::read(),
@@ -118,12 +117,12 @@ fn vmexit_handler(ctx: &mut VmCpuRegisters) -> bool {
             if ctx.guest_regs.sepc == 0x8020_0004 {
                 ctx.guest_regs.gprs.set_reg(A0, 0x6688);
                 ctx.guest_regs.sepc += 4;
-                return true;
+            } else {
+                panic!("LoadGuestPageFault: stval{:#x} sepc: {:#x}",
+                    stval::read(),
+                    ctx.guest_regs.sepc
+                );
             }
-            panic!("LoadGuestPageFault: stval{:#x} sepc: {:#x}",
-                stval::read(),
-                ctx.guest_regs.sepc
-            );
         },
         _ => {
             panic!(
