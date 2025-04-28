@@ -17,7 +17,7 @@ make payload
 
 make run A=exercises/simple_hv/ BLK=y > $tmp_file 2>/dev/null
 
-output=$(grep -a "$grep_content" $tmp_file | tail -n1  )
+output=$(grep -a "$grep_content" $tmp_file | tail -n2  )
 
 rm -rf $tmp_file 
 
